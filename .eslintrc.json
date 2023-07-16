@@ -1,3 +1,54 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "plugin:perfectionist/recommended-natural"],
+  "plugins": ["perfectionist", "unused-imports"],
+  "rules": {
+    "perfectionist/sort-objects": [
+      "error",
+      {
+        "order": "asc",
+        "type": "natural"
+      }
+    ],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "vars": "all",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "perfectionist/sort-imports": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": [
+          "react",
+          ["builtin", "external"],
+          "internal",
+          ["parent", "sibling", "index"],
+          "side-effect",
+          "style",
+          "object",
+          ["parent-type", "sibling-type", "index-type"],
+          "internal-type",
+          "type",
+          "unknown"
+        ],
+        "custom-groups": {
+          "value": {
+            "react": ["react", "react-*"]
+          },
+          "type": {
+            "react": "react"
+          }
+        },
+        "newlines-between": "always",
+        "internal-pattern": ["@/*/**", "@/**"],
+        "read-tsconfig": false
+      }
+    ]
+  }
 }
